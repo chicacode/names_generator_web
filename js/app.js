@@ -30,7 +30,7 @@ function cargarNombres(e){
     // crear URL
     let url = '';
     // Se construye la url conforme a los datos del formulario, por los parametros que se quiera filtrar
-    url+= 'http://uinames.com/api/?';
+    url+= 'https://uinames.com/api/?';
 
     // Si hay origen agregarlo a la URL
     if(origenSeleccionado !== ''){
