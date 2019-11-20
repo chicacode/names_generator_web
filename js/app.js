@@ -49,9 +49,7 @@ function cargarNombres(e){
     // Es mejor con fetch api que ocn AJAX
 
     fetch(url)
-        .then(function(res){
-            return res.json();
-        })
+        .then(res => res.json())
         .then(function(data){
             let html = `<h2>Babys Names</h2>`;
             html += `<ul class="lista">`;
@@ -63,8 +61,6 @@ function cargarNombres(e){
             html += `</ul>`;
             document.querySelector('#resultado').innerHTML = html;
         })
-        .catch(function(error){
-            console.log(error);
-        })
+        .catch(error => console.log(error))
 }
 // ? (es para enviar más arguments o parametros a la url)
