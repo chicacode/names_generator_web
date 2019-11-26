@@ -44,37 +44,23 @@ function cargarNombres(e){
     if(cantidad !== ''){
         url+= `amount=${cantidad}&`; // Se pasa con template literal ya que el origin debe ser igual al region seleecionado en el form
     }
- console.log(url);
-    // Conectar con AJAX
-    const xhr = new XMLHttpRequest(); // crear objeto
 
-    // Abrimos conexión
-    xhr.open('GET', url, true);
+    // Conectar con fetch API
+    // Es mejor con fetch api que ocn AJAX
 
-    // Datos e impresión del template
-    xhr.onload = function(){
-        if(this.status === 200){
-            const nombres = JSON.parse(this.responseText);
-            // Generar un html para pintar
-            // Subtitulo
-            let htmlNombres = '<h2>Nombres Generados</h2>';
-
-            // Se crea una lista
-            htmlNombres += '<ul class="lista">';
-            // Imprimir cada Nombre
-            nombres.forEach(function(nombre){ // Se concatena la lista li con ul
-                htmlNombres += `
-                    <li>${nombre.name}</li>  
+    fetch(url)
+        .then(res => res.json())
+        .then(function(data){
+            let html = `<h2>Babys Names</h2>`;
+            html += `<ul class="lista">`;
+            data.forEach(function(nombre){
+                html += `
+                    <li>${nombre.name}</li>
                 `;
-            });
-            htmlNombres += '</ul>'; // se cierra la lista
-
-            // Se muestra en DOM
-            document.getElementById('resultado').innerHTML = htmlNombres;
-        }
-    }
-    // Enviar el REQUEST
-    xhr.send();
-
+            })
+            html += `</ul>`;
+            document.querySelector('#resultado').innerHTML = html;
+        })
+        .catch(error => console.log(error))
 }
 // ? (es para enviar más arguments o parametros a la url)
